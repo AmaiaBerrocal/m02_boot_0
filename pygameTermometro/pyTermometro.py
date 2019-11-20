@@ -13,8 +13,15 @@ class NumberInput():
     
     def __init__(self, value = 0):
         self.__font = pygame.font.SysFont("Arial", 24)
-        
-        
+        self.value(value)
+    
+    def on_event(self, event):
+        if event.type == KEYDOWWN:
+            if event.unicode.isdigit() and len(self.__strValue) < 10:
+                self.__strValue += event.unicode
+            elif event.key == K_BACKSPACE:
+                self.__strValue = self.__strValue[:-1]
+                                
     def render(self):
         textBlock = self.__font.render(self.__strValue, True, (74, 74, 74))
         rect = textBlock.get_rect()
@@ -128,6 +135,10 @@ class MainApp():
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.__on_close()
+                    
+                self.entrada.on_event(event)    
+                                   
+                    
             #pintamos el termometro en su posicion        
             self.__screen.blit(self.termometro.custome, (50, 34)) #coordenadas elegidas en la planificación
             

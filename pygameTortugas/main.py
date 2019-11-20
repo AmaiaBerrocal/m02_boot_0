@@ -1,13 +1,14 @@
 import pygame, sys, random
 
 class Runner():
-    __customes = ('tortuga', 'pez', 'pulpo', 'perro', 'gato')
+    __customes = ('tortuga', 'elefante', 'perro', 'gato')
     
     def __init__(self, x = 0, y = 0):
         
-        ixCustome = random.randint(0, 4)
+        ixCustome = random.randint(0, 3)
        
         self.custome = pygame.image.load("images/{}.png".format(self.__customes[ixCustome]))
+        self.custome = pygame.transform.scale(self.custome, (32, 32))
         self.position = [x, y]
         self.name = ""
         
@@ -24,7 +25,7 @@ class Game():
     
     def __init__(self):
         self.__screen = pygame.display.set_mode((640, 480))
-        self.__background = pygame.image.load("images/cesped.png")
+        self.__background = pygame.image.load("images/cesped.jpg")
         pygame.display.set_caption("Carrera de animales")
         
         for i in range(4):
